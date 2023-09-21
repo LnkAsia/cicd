@@ -11,7 +11,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: create-pull-request-for-dev
-        run: gh pr create -B dev
+        run: gh pr create -B dev --fill
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
