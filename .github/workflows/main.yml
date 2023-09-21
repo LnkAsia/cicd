@@ -1,0 +1,19 @@
+name: Automatically create / update pull request
+
+on:
+  push:
+    branches:
+      - "temp-prod"
+    branches-ignore:
+      - "prod"
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: create pull request
+        run: gh pr create -B prod
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
