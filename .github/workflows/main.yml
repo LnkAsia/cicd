@@ -3,8 +3,7 @@ on:
   push:
     branches:
       - "temp-dev"
-    branches-ignore:
-      - "dev"
+
 jobs:
   create-pull-request-for-dev:
     runs-on: ubuntu-latest
