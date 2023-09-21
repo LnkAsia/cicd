@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 {
     'name': 'Asterisk Plus',
-    'version': '3.0',
+    'version': '3.1',
     'author': 'Odooist',
     'price': 0,
     'currency': 'EUR',
