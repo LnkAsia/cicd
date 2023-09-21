@@ -17,7 +17,7 @@ jobs:
   release_pull_request:
     runs-on: ubuntu-latest
     name: release_pull_request
-    environment: cherry_pick_in_pp
+    environment: cherry_pick_in_prod
     needs: create-pull-request-for-pp
     steps:
     - name: checkout
