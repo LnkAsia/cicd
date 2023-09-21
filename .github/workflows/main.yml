@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - "temp-prod"
-    branches-ignore:
-      - "prod"
+
 
 jobs:
   create-pull-request:
