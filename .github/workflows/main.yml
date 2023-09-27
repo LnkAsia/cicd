@@ -15,11 +15,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-  release_pull_request:
+  cherry_pick_in_pp:
     runs-on: ubuntu-latest
-    name: release_pull_request
+    name: cherry_pick_in_pp
     needs: create-pull-request-for-dev
-    environment: cherrypick_for_pp
+    environment: cherry_pick_in_pp
     
     steps:
     - name: checkout
@@ -27,7 +27,25 @@ jobs:
     - name: Create PR to branch
       uses: gorillio/github-action-cherry-pick@master
       with:
-        pr_branch: 'temp-pp'
+        pr_branch: 'pp'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITBOT_EMAIL: <BOT_EMAIL>
+        DRY_RUN: false
+
+  cherry_pick_in_prod:
+    runs-on: ubuntu-latest
+    name: cherry_pick_in_prod
+    needs: cherry_pick_in_pp
+    environment: cherry_pick_in_prod
+    
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: Create PR to branch
+      uses: gorillio/github-action-cherry-pick@master
+      with:
+        pr_branch: 'prod'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITBOT_EMAIL: <BOT_EMAIL>
