@@ -2,7 +2,7 @@ name: PR for dev branch
 on:
   push:
     branches:
-      - "temp-dev"
+      - "DEV-RUN-*"
 
 jobs:
   create-pull-request-for-dev:
