@@ -6,7 +6,7 @@
 
 {
     'name': 'Custom Product Labels',
-    'version': '12.0.1.0.5',
+    'version': '12.0.1.2.5',
     'category': 'Extra Tools',
     'author': 'Garazd Creation',
     'website': "https://garazd.biz",
