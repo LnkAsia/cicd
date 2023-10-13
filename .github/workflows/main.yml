@@ -1,32 +1,28 @@
-name: cherrypick from pp to prod
+name: automerge
 on:
-  push:
-    branches:
-      - temp-pp
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - synchronize
+      - opened
+      - edited
+      - ready_for_review
+      - reopened
+      - unlocked
+  pull_request_review:
+    types:
+      - submitted
+  check_suite:
+    types:
+      - completed
+  status: {}
 jobs:
-  create-pull-request-for-pp:
+  automerge:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - name: create-pull-request-for-pp
-        run: gh pr create -B pp --title 'Merge temp-pp into pp' --body 'Created by Github action'
+      - id: automerge
+        name: automerge
+        uses: "pascalgn/automerge-action@v0.15.6"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-  release_pull_request:
-    runs-on: ubuntu-latest
-    name: release_pull_request
-    environment: cherry_pick_in_prod
-    needs: create-pull-request-for-pp
-    steps:
-    - name: checkout
-      uses: actions/checkout@v1
-    - name: Create PR to branch
-      uses: gorillio/github-action-cherry-pick@master
-      with:
-        pr_branch: 'temp-prod'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITBOT_EMAIL: <BOT_EMAIL>
-        DRY_RUN: false
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
