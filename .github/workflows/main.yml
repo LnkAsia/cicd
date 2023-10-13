@@ -3,7 +3,6 @@ name: Auto approve and merge PRs
 # Trigger the workflow on pull request
 on:
   pull_request:
-    branches: prod
 
 jobs:
   automerge:
