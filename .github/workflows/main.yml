@@ -36,18 +36,11 @@ jobs:
       uses: gorillio/github-action-cherry-pick@master
       with:
         pr_branch: 'pp'
+        pr_labels: 'automerge'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITBOT_EMAIL: <BOT_EMAIL>
         DRY_RUN: false
-
-    - name: Enable Pull Request Automerge
-      if: steps.cpr.outputs.pull-request-operation == 'created'
-      uses: peter-evans/enable-pull-request-automerge@v3
-      with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          merge-method: squash
 
   create-pull-request-for-prod:
     runs-on: ubuntu-latest
@@ -62,6 +55,7 @@ jobs:
       uses: gorillio/github-action-cherry-pick@master
       with:
         pr_branch: 'prod'
+        pr_labels: 'automerge'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITBOT_EMAIL: <BOT_EMAIL>
