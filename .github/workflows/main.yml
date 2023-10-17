@@ -1,6 +1,8 @@
 name: automerge
 on:
   pull_request:
+    branches:
+      - pp
     types:
       - labeled
       - unlabeled
