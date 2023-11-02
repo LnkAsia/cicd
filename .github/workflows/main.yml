@@ -32,7 +32,7 @@ jobs:
     - name: checkout
       uses: actions/checkout@v1
     - name: Create PR to branch
-      id: cpr
+      id: open-pr
       uses: gorillio/github-action-cherry-pick@master
       with:
         pr_branch: 'pp'
@@ -41,6 +41,13 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITBOT_EMAIL: <BOT_EMAIL>
         DRY_RUN: false
+    - name: enable automerge
+      if: steps.open-pr.outputs.pr_number != ''
+      uses: peter-evans/enable-pull-request-automerge@v2
+      with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.open-pr.outputs.pr_number }}
+          merge-method: merge
 
   create-pull-request-for-prod:
     runs-on: ubuntu-latest
@@ -60,3 +67,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITBOT_EMAIL: <BOT_EMAIL>
         DRY_RUN: false
+    - name: enable automerge
+      if: steps.open-pr.outputs.pr_number != ''
+      uses: peter-evans/enable-pull-request-automerge@v2
+      with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.open-pr.outputs.pr_number }}
+          merge-method: merge
